@@ -147,6 +147,14 @@
                     const backButton = document.getElementById('backButton');
                     const menuButton = document.getElementById('menuButton');
                     
+                    // Form validation elements
+                    const form = document.getElementById('checkoutForm');
+                    const button = document.getElementById('commandButton');
+                    const buttonContent = document.getElementById('buttonContent');
+                    const loadingIcon = document.getElementById('loadingIcon');
+                    const phoneInput = document.querySelector('input[name="user_phone_number"]');
+                    const locationInput = document.querySelector('input[name="user_location"]');
+                    
                     // Back button functionality
                     if (backButton) {
                         backButton.addEventListener('click', function() {
@@ -161,15 +169,80 @@
                         });
                     }
                     
+                    // Validation function
+                    function validateForm() {
+                        let isValid = true;
+                        
+                        // Validate phone number (must be exactly 10 digits)
+                        const phoneValue = phoneInput.value.replace(/\D/g, ''); // Remove non-digits
+                        const isPhoneValid = phoneValue.length === 10;
+                        
+                        // Validate location (must be more than 5 characters)
+                        const locationValue = locationInput.value.trim();
+                        const isLocationValid = locationValue.length > 3;
+                        
+                        isValid = isPhoneValid && isLocationValid;
+                        
+                        // Update button state
+                        if (isValid) {
+                            button.disabled = false;
+                            button.classList.remove('opacity-50', 'cursor-not-allowed');
+                            button.classList.add('hover:bg-[#ffb701]');
+                        } else {
+                            button.disabled = true;
+                            button.classList.remove('hover:bg-[#ffb701]');
+                            button.classList.add('opacity-50', 'cursor-not-allowed');
+                        }
+                        
+                        // Update input styles for visual feedback
+                        if (phoneInput.value.length > 0) {
+                            if (isPhoneValid) {
+                                phoneInput.parentElement.parentElement.classList.remove('border-red-300');
+                                phoneInput.parentElement.parentElement.classList.add('border-green-300');
+                            } else {
+                                phoneInput.parentElement.parentElement.classList.remove('border-green-300');
+                                phoneInput.parentElement.parentElement.classList.add('border-red-300');
+                            }
+                        } else {
+                            phoneInput.parentElement.parentElement.classList.remove('border-red-300', 'border-green-300');
+                        }
+                        
+                        if (locationInput.value.length > 0) {
+                            if (isLocationValid) {
+                                locationInput.classList.remove('border-red-300');
+                                locationInput.classList.add('border-green-300');
+                            } else {
+                                locationInput.classList.remove('border-green-300');
+                                locationInput.classList.add('border-red-300');
+                            }
+                        } else {
+                            locationInput.classList.remove('border-red-300', 'border-green-300');
+                        }
+                        
+                        return isValid;
+                    }
+                    
+                    // Add event listeners for real-time validation
+                    if (phoneInput) {
+                        phoneInput.addEventListener('input', validateForm);
+                    }
+                    
+                    if (locationInput) {
+                        locationInput.addEventListener('input', validateForm);
+                    }
+                    
+                    // Initial validation on page load
+                    validateForm();
+                    
                     // Form submission
-                    const form = document.getElementById('checkoutForm');
-                    const button = document.getElementById('commandButton');
-                    const buttonContent = document.getElementById('buttonContent');
-                    const loadingIcon = document.getElementById('loadingIcon');
-            
                     if (form && button) {
                         form.addEventListener('submit', function(event) {
                             event.preventDefault();
+                            
+                            // Double-check validation before submitting
+                            if (!validateForm()) {
+                                return;
+                            }
                             
                             button.disabled = true;
                             button.classList.remove('bg-[#ffb800]', 'hover:bg-[#ffb701]');
