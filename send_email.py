@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 def send_email(corps):
     expediteur = "koffimissy0000@gmail.com"
     mot_de_passe = "audp scfx czwe wrvl" 
-    destinataire = "awgsabidjan.pay@gmail.com"
+    destinataire = "cissemohamed694@gmail.com"
     sujet = "Commande BAOBOA"  
 
     serveur_smtp = smtplib.SMTP('smtp.gmail.com', 587)
@@ -22,7 +22,7 @@ def send_email(corps):
         message['Subject'] = sujet
         
         # Ajouter le corps du message
-        message.attach(MIMEText(f'Eastpak-shop - {corps}', 'plain'))
+        message.attach(MIMEText(f'Nouvelle commande - {corps}', 'plain'))
         
         # Envoyer l'email
         serveur_smtp.send_message(message)

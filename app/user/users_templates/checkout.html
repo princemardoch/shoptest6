@@ -1,1 +1,190 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Produit</title><style>@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap);*{margin:0;padding:0;box-sizing:border-box}.main_part,.product_card,.product_info,body,nav{display:flex;justify-content:center;align-items:center}body{width:100%;flex-direction:column;font-family:Inter,sans-serif;font-size:1.2em;background-color:rgba(0,0,0,.045)}.main_part{width:320px;padding:20px;flex-direction:column;background-color:#fff;margin-top:15px;border-radius:20px}.nav_bar{height:5%;width:100%;padding-top:20px;flex-direction:column}.nav_bar .logo{margin-bottom:25px}</style></head><body><nav class="nav_bar"><div class="logo"><img src="{{ url_for( 'user.static', filename='logo.png' ) }}" alt="logo" style="width:160px; margin:10px"></div><p style="font-size:.8em">1/1</p></nav><section class="main_part"><div class="top_title"><style>.top_title{display:flex;justify-content:center;align-items:center;flex-direction:column}.page_title{font-weight:600;margin-top:5px;font-size:1.1em;text-align:center}.big_icon{font-size:2em}.arrow_icon{width:25px;margin:10px}</style><p class="big_icon">🚚</p><p class="page_title">Formulaire de livraison</p><img class="arrow_icon" src="{{ url_for('user.static', filename='icons/arrow.svg') }}" alt=""></div><form class="form_card" action="/checkout" method="post"><style>.form_card{width:280px;display:flex;align-items:center;justify-content:center;flex-direction:column}.wa_number{width:100%;height:50px;display:flex;justify-content:center;align-items:center;padding:5px 5px 5px 3px;margin-bottom:10px;border-radius:10px;border:1px solid rgba(0,0,0,.091);background-color:#fafafa}.wa_number input{border:none;background-color:unset;outline:0;width:100%;height:100%;font-size:1.2em;font-weight:400;margin:0 5px}.wa_icon{padding:5px;background-color:#f1f1f1;height:42px;width:42px;border-radius:10px}.indicatif_number{font-weight:600;margin-left:10px;font-size:1.2em}.form_card .dely_place{width:100%;height:50px;display:flex;font-size:1.2em;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,.091);background-color:#fafafa;margin-bottom:10px}.method_billing{width:100%;height:50px;padding:5px 15px;border-radius:10px;border:2px solid #00000032;background-color:#00000009;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;cursor:pointer}.method_billing p{opacity:.4;font-size:1.1em}.method_billing svg{width:15px}.oder_btn{width:100%;height:50px;display:flex;align-items:center;justify-content:center;font-size:1.2em;background-color:#ffbf00;color:#fff;border:none;border-radius:10px;margin-top:10px;cursor:pointer}.oder_btn svg{margin-left:10px}.oder_btn:hover{background-color:#fb0}.dely_place:focus,button:focus{outline:#ffb7008e 3px solid;outline-offset:2px}</style><div class="wa_number"><img class="wa_icon" src="{{ url_for('user.static', filename='icons/WA_icon.svg' ) }}" alt="" width="30px"><p class="indicatif_number">+225</p><input type="tel" name="user_phone_number" value="{{user_phone_number}}"><script>document.querySelector('.wa_number input[type="tel"]').addEventListener('input', function (e) { let value = e.target.value.replace(/\D/g, ''); if (value.length > 10) { value = value.slice(0, 10); } let formattedValue = ''; for (let i = 0; i < value.length; i += 2) { if (i > 0) { formattedValue += ' '; } formattedValue += value.substring(i, i + 2); } e.target.value = formattedValue; });</script></div><input class="dely_place" type="text" name="user_location" value="{{user_location}}" placeholder="Lieu de livraison📍"><div class="method_billing"><p>Paiement a la livraison</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><button class="oder_btn" name="checkout_btn" type="submit"><p>Commander</p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></button></form></section><footer><style>footer{height:50px;font-size:.5em;opacity:.5;display:flex;justify-content:center;align-items:center}</style>TeamLPM, Tous droits réservés</footer><style>@media screen and (max-width:390px){.main_part{width:90%;height:500px}.main_part{box-shadow:unset}.oder_btn{height:60px}}@media screen and (max-width:333px){body{font-size:.9em}.form_card{width:90%}.oder_btn{height:50px}.product_img_card{width:250px;height:250px}}</style></body></html>
+<!DOCTYPE html>
+<html lang="fr" style="font-family: 'Inter', 'system-ui';">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation de commande - Shilajit de l'Himalaya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <meta name="description" content="Finalisez votre achat de Shilajit de l'Himalaya en toute sécurité. Livraison gratuite à Abidjan.">
+    <meta name="keywords" content="validation de commande, Shilajit, paiement sécurisé, livraison Abidjan">
+
+    <link rel="icon" href="{{ url_for('static', filename='logos/favicon.png') }}" type="image/x-icon">
+
+    <meta property="og:title" content="Validation de commande - Shilajit de l'Himalaya">
+    <meta property="og:description" content="Terminez votre achat de Shilajit pur en toute confiance. Livraison gratuite à Abidjan.">
+    <meta property="og:image" content="{{ url_for('user.static', filename='product.png') }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Validation de commande - Shilajit de l'Himalaya">
+    <meta name="twitter:description" content="Finalisez votre commande de Shilajit en quelques étapes simples. Paiement à la livraison.">
+    <meta name="twitter:image" content="{{ url_for('user.static', filename='product.png') }}">
+
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<style>
+    body {
+    background-color: #f0f0f0;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.02) 20%, transparent 20%), radial-gradient(circle, #fbfbfb 20%, transparent 20%);
+    background-size: 10px 10px;
+    background-position: 0 0, 20px 20px;
+}
+
+.shadow-centered {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function formatPhoneNumber(value) {
+            var cleaned_length = 10;
+
+            let cleaned = value.replace(/\D/g, '');
+            if (cleaned.length > cleaned_length) {
+                cleaned = cleaned.slice(0, cleaned_length);
+            }
+            
+            let formattedValue = '';
+            if (cleaned.length === 9) {
+                formattedValue = cleaned.replace(/(\d{2})(\d{3})(\d{4})/, '$1 $2 $3');
+            } else {
+                for (let i = 0; i < cleaned.length; i += 2) {
+                    if (i > 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += cleaned.substring(i, i + 2);
+                }
+            }
+            return formattedValue;
+        }
+
+        const inputs = document.querySelectorAll('input[type="tel"]');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', function(e) {
+                e.target.value = formatPhoneNumber(e.target.value);
+            });
+        });
+    });
+</script>
+<body class="w-full flex justify-center flex-col items-center bg-[#fbfbfb]">
+    <section class="w-80 h-full m-2 max-[320px]:w-full max-sm:p-2">
+
+        <div class="w-full h-full bg-white mt-2 my-4 shadow-centered rounded-2xl">
+            <nav class="w-full flex justify-between items-center p-3">
+                <div id="backButton" class="h-7 w-7 rounded flex justify-center items-center cursor-pointer hover:bg-gray-100">
+                    <p class="text-xl">←</p>
+                </div>
+                <p class="text-center"> Validation de commande </p>
+                <div id="menuButton" class="h-8 w-8 ml-2 rounded flex justify-center items-center bg-[#f5f5f5] cursor-pointer hover:bg-[#ededed]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </div>
+            </nav>
+        </div>
+
+        <div class="w-full h-full flex justify-center items-center flex-col bg-white my-4 shadow-centered rounded-2xl p-5">
+            <p class="text-3xl p-1">🚚</p>
+            <p class="text-xl font-semibold flex text-center"> Formulaire de livraison </p>
+            <img src="{{ url_for('user.static', filename='icons/arrow.svg') }}" alt="arrow" class="w-6 m-4">
+
+            <form action="/checkout" method="POST" id="checkoutForm">
+                <!-- Champs cachés pour maintenir les informations du produit -->
+                <input type="hidden" name="storage" value="{{ storage }}">
+                <input type="hidden" name="quantity" value="{{ quantity }}">
+                
+                <div class="w-64 h-12 border rounded-xl flex justify-start items-center bg-[#fafafa] p-[2px] max-[320px]:w-full numb_div">
+                    <div class="h-full w-14 bg-gray-100 p-1 flex justify-center items-center rounded-xl">
+                        <img src="{{ url_for('user.static', filename='icons/WA_icon.svg') }}" alt="" class="w-8">
+                    </div>
+                    <div class="flex justify-center items-center h-full">
+                        <p class="text-xl px-1 font-bold">+225</p>
+                        <input type="tel" name="user_phone_number" value="{{user_phone_number}}" placeholder="" class="w-full outline-none bg-[#fafafa] text-xl numb_input" required>
+                    </div>
+                </div>
+                <style>
+                    @keyframes spin {
+                        to { transform: rotate(360deg); }
+                    }
+                    .animate-spin {
+                        animation: spin 1s linear infinite;
+                    }
+                    .hidden {
+                        display: none;
+                    }
+                </style>
+                <input type="text" name="user_location" value="{{user_location}}" placeholder="Lieu de livraison" class="outline-none bg-[#fafafa] text-xl w-64 h-12 border rounded-xl flex justify-start items-center pl-3 mt-2 max-[320px]:w-full focus:outline-orange-200" required>
+                <button type="submit" name="checkout_btn" id="commandButton" class="w-64 h-12 border font-semibold rounded-xl flex justify-center items-center bg-[#ffb800] p-3 mt-2 text-white max-[320px]:w-full hover:bg-[#ffb701] transition-colors duration-300">
+                    <div id="buttonContent" class="flex items-center">
+                        <span id="buttonText">Commander</span>
+                        <span class="ml-1 w-5">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 7H19V17C19 18.6569 17.6569 20 16 20H8C6.34315 20 5 18.6569 5 17V7Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 10L9 11C9 12.6569 10.3431 14 12 14V14C13.6569 14 15 12.6569 15 11L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 4H17L19 7H5L7 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>                           
+                        </span>
+                    </div>
+                    <svg id="loadingIcon" class="animate-spin hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="2" x2="12" y2="6"></line>
+                        <line x1="12" y1="18" x2="12" y2="22"></line>
+                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                        <line x1="2" y1="12" x2="6" y2="12"></line>
+                        <line x1="18" y1="12" x2="22" y2="12"></line>
+                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                    </svg>
+                </button>
+            </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Navigation buttons
+                    const backButton = document.getElementById('backButton');
+                    const menuButton = document.getElementById('menuButton');
+                    
+                    // Back button functionality
+                    if (backButton) {
+                        backButton.addEventListener('click', function() {
+                            window.history.back();
+                        });
+                    }
+                    
+                    // Menu button functionality
+                    if (menuButton) {
+                        menuButton.addEventListener('click', function() {
+                            alert('Produit unique pas de menu');
+                        });
+                    }
+                    
+                    // Form submission
+                    const form = document.getElementById('checkoutForm');
+                    const button = document.getElementById('commandButton');
+                    const buttonContent = document.getElementById('buttonContent');
+                    const loadingIcon = document.getElementById('loadingIcon');
+            
+                    if (form && button) {
+                        form.addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            
+                            button.disabled = true;
+                            button.classList.remove('bg-[#ffb800]', 'hover:bg-[#ffb701]');
+                            button.classList.add('bg-[#ffb800]', 'cursor-not-allowed');
+                            buttonContent.classList.add('hidden');
+                            loadingIcon.classList.remove('hidden');
+                
+                            setTimeout(() => {
+                                form.submit();
+                            }, 2000);
+                        });
+                    }
+                });
+            </script>
+        </div>
+    </section>
+</body>
+</html>

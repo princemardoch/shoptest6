@@ -86,7 +86,7 @@ class Order:
             return 'failed_create_order'
         
     @staticmethod
-    def valid_checkout_form(user_phone_number, user_location):
+    def valid_checkout_form(user_phone_number, user_location, product_storage, product_quantity):
         logging_setup()
         try:
             phone_str = ''.join(str(user_phone_number).split())
@@ -99,7 +99,40 @@ class Order:
             
             formatted_phone = int(f"225{phone_str}")
             
-            email_body = f'Numero de telephone : {formatted_phone}\n- Lieu de livraison : {user_location.strip()}'
+            # Prix pour chaque variation
+            variation_prices = {
+                '10g': 25000,
+                '20g': 35000,
+                '50g': 75000,
+                '100g': 140000
+            }
+            
+            # Calculer le prix total
+            unit_price = variation_prices.get(product_storage, 25000)  # Prix par défaut 10g
+            total_price = unit_price * int(product_quantity)
+            
+            # Créer un email détaillé avec toutes les informations
+            email_body = f'''
+NOUVELLE COMMANDE SHILAJIT
+==========================
+
+*📱 Numéro de téléphone* : {formatted_phone}
+*📍 Lieu de livraison* : {user_location.strip()}
+
+*🛍️ DÉTAILS DU PRODUIT* :
+- *Produit :* Pierre noire de l'Inde (Shilajit)
+- *Format :* {product_storage}
+- *Quantité :* {product_quantity}
+- *Prix unitaire :* {unit_price:,} FCFA
+- *Prix total :* {total_price:,} FCFA
+
+*💰 PAIEMENT* : À la livraison
+*🚚 LIVRAISON* : Gratuite à Abidjan
+
+==========================
+Commande générée automatiquement
+            '''
+            
             send_email_func = send_email(email_body)
             if send_email_func == 'success':
                 return 'success_valid_checkout_form'

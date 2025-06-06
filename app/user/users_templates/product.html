@@ -1,1 +1,286 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>Produit</title> <style> @import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap); * { margin: 0; padding: 0 } .product_card, .product_info, body, nav { display: flex; justify-content: center; align-items: center } body { width: 100%; flex-direction: column; font-family: Inter, sans-serif; font-size: 1.2em } .main_part { width: 320px; padding: 20px; flex-direction: column } .nav_bar { height: 5%; } .product_card { width: 100%; flex-direction: column } .product_info { font-size: .7em; flex-wrap: wrap } .product_info_card { width: 100%; padding: 10px } .brand, .dely_info, .stock { background-color: rgba(0, 0, 0, .05); padding: 5px 10px; border-radius: 10px; height: 20px; margin: 3px 3px; opacity: .7; display: flex; justify-content: center; align-items: center } .dely_info { border: 2px solid #ffb800; opacity: 1 } </style> </head> <body> <style> body { background-color: rgba(0, 0, 0, .045) } </style> <nav class="nav_bar"> <div class="logo"><img src="{{ url_for( 'user.static', filename='logo.png' ) }}" alt="logo" style="width:160px; margin:10px"></div> </nav> <section class="main_part"> <style> .main_part { background-color: #fff; margin-top: 15px; border-radius: 20px; box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1) } </style> <div class="product_card"> <style> .product_card { height: 98% } </style> <div class="product_img_card"> <style> .product_img_card { width: 300px; height: 300px; background-image:url("{{ url_for( 'user.static', filename='product.jpg' ) }}"); background-size: cover; border-radius: 15px } </style> </div> <div class="product_info_card"> <div class="product_info"> <div class="stock">80 en stock</div> <div class="dely_info">Livraison 24H 🚚</div> <div class="brand">Eastpak</div> </div> <div class="product_title"> <style> .product_title { font-size: 1.2em; width: 100%; margin-top: 10px; font-weight: 600; text-align: center } </style> <p> Sac Eastpak </p> </div> <div class="variations_div"> <style> .variations_div { width: 100%; display: flex; justify-content: center; text-align: center; flex-direction: column; margin-top: 20px } .card_label { margin-bottom: 5px } .variations_group { display: flex; justify-content: center; text-align: center; flex-wrap: wrap } .variations_group input[type=radio] { display: none } .variations_group label { margin: 5px; padding: 5px; border-radius: 10px; font-size: .8em; background-color: rgba(0, 0, 0, .02); border: 1px solid rgba(0, 0, 0, .06); cursor: pointer; display: flex; justify-content: center; align-items: center } .variations_group input[type=radio]:checked+label { background-color: rgba(255, 94, 0, .047); border: 2px solid rgba(255, 157, 0, .651) } </style> <form action="/create_order" id="create_order" method="POST"></form> <p class="card_label">Couleur:</p> <div class="variations_group"><input type="radio" id="option1" name="storage"><label for="option1" style="padding: 5px;">Noir</label><input type="radio" id="option2" name="storage" checked="checked"><label for="option2" style="padding: 5px;">Rouge</label><input type="radio" id="option3" name="storage"><label for="option3" style="padding: 5px;">Rose</label><input type="radio" id="option4" name="storage"><label for="option4" style="padding: 5px"> Vert </label></div> </div> <div class="price_card"> <style> .price_card { width: 100%; display: flex; justify-content: space-between; margin-top: 20px } .product_card .price { padding: 15px 15px; margin-right: 5px; background-color: #e8e8e890; border-radius: 10px; font-weight: 800; text-align: center } .quantity input { background-color: unset; border: none; width: 80px; font-size: 1.2em; font-weight: 700; outline: 0; padding: 15px 15px; margin-right: 5px; background-color: #e8e8e85a; border-radius: 10px; border: 1px solid rgba(0, 0, 0, .462); font-weight: 800; text-align: center } .quantity input:focus { outline: #ffb7008e 3px solid; outline-offset: 2px } </style> <div class="price">💰 15 000 FCFA</div> <div class="quantity"><input type="number" placeholder="01" value="01"></div> </div> <div><button type="submit" class="order_btn" name="order_btn" form="create_order"> <style> .order_btn { background-color: #ffb800; border: none; border-radius: 15px; padding: 8px; margin-top: 10px; width: 100%; color: #fff; display: flex; justify-content: center; align-items: center; cursor: pointer } .order_btn div { width: 90%; padding-left: 30px } .order_btn svg { margin-right: 5px } .order_now { font-size: 1.8em; font-weight: 800; display: flex; justify-content: center; align-items: center } .price_btn { font-size: .9em } .order_btn:hover { background-color: #eca900 } </style> <div> <p class="price_btn">Prix : 15 000 FCFA</p> <p class="order_now">Commander</p> </div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"> <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg> </button></div> </div> </div> </section> <footer> <style> footer { height: 50px; font-size: .5em; opacity: .5; display: flex; justify-content: center; align-items: center } </style>TeamLPM, Tous droits réservés </footer> <style> @media screen and (max-width:390px) { .main_part { width: 90%; height: 750px; margin-top: -70px } body { background-color: #fff } .main_part { background-color: unset; box-shadow: unset } .order_btn { height: 60px } } @media screen and (max-width:333px) { body { font-size: 1em } .product_img_card { width: 250px; height: 250px } } </style> </body> </html>
+<!DOCTYPE html>
+<html lang="fr" style="font-family: 'Inter', 'system-ui';">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shilajit de l'Himalaya - Produit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <meta name="description" content="Découvrez notre Shilajit pur de l'Himalaya : énergie naturelle, antioxydants puissants. Livraison gratuite à Abidjan.">
+    <meta name="keywords" content="Shilajit, Himalaya, énergie naturelle, antioxydants, bien-être, santé naturelle">
+
+    <link rel="icon" href="{{ url_for('static', filename='logos/favicon.png') }}" type="image/x-icon">
+
+    <meta property="og:title" content="Shilajit de l'Himalaya - Notre Boutique">
+    <meta property="og:description" content="Shilajit pur et brut de l'Himalaya. Boost d'énergie naturel et antioxydants puissants. Commandez dès maintenant.">
+    <meta property="og:image" content="{{ url_for('user.static', filename='product.jpg') }}">
+    <meta property="og:type" content="product">
+    <meta property="og:price:amount" content="35 000">
+    <meta property="og:price:currency" content="FCFA">
+    <meta property="og:availability" content="in stock">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shilajit de l'Himalaya - Notre Boutique">
+    <meta name="twitter:description" content="Shilajit pur et brut de l'Himalaya. Cliquez pour voir tous les détails et options d'achat.">
+    <meta name="twitter:image" content="{{ url_for('user.static', filename='product.jpg') }}">
+
+    <meta itemprop="name" content="Shilajit de l'Himalaya">
+    <meta itemprop="description" content="Shilajit pur et brut venant directement de l'Himalaya, trésor naturel pour votre bien-être">
+    <meta itemprop="image" content="{{ url_for('user.static', filename='product.jpg') }}">
+
+    <meta name="robots" content="index, follow">
+    <style>
+        .bottom_baobao_logo{
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.093);
+            z-index: 10000;
+
+            height: 50px;
+            width: 50px;
+            
+            border-radius: 100%;
+            border: solid 2px #ffb800;
+
+            background-image: url("{{ url_for('user.static', filename='baobao_bottom_logo.png') }}");
+            background-size: contain;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.02) 20%, transparent 20%), radial-gradient(circle, #fbfbfb 20%, transparent 20%);
+            background-size: 10px 10px;
+            background-position: 0 0, 20px 20px;
+        }
+        
+        .shadow-centered {
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .variations_div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .card_label {
+            margin-bottom: 5px;
+        }
+
+        .variations_group {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .variations_group input[type="radio"] {
+            display: none;
+        }
+
+        .variations_group label {
+            margin: 5px;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .variations_group input[type="radio"]:checked + label {
+            background-color: rgba(255, 94, 0, 0.047);
+            border: 2px solid rgba(255, 157, 0, 0.651);
+        }
+        
+        #order_btn:hover #arrow_order_btn{
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <body class="w-full flex justify-center items-center bg-[#fbfbfb] p-2">
+        <section class="w-[350px] h-full m-2 max-[400px]:w-full">
+            <form action="{{ url_for('user.checkout') }}" id="select_product_form" method="GET" class="w-full h-full flex justify-center items-center flex-col bg-white shadow-centered rounded-2xl p-3">
+                <div class="w-[calc(50%-full)] bg-gray-50">
+                    <img src="{{ url_for('user.static', filename='product.png') }}" class="w-full h-full object-cover rounded-xl">
+                </div>
+
+                <div class="w-full flex justify-center items-center mt-2 flex-wrap">
+                    <div class="text-sm opacity-90 m-1 py-2 px-3 bg-gray-100 rounded-xl">
+                        Stock limité
+                    </div>
+                    <div class="text-sm opacity-90 m-1 py-2 px-3 bg-gray-100 rounded-xl border-[#ffb800] border-2">
+                        <p>Dely Free 🚚</p>
+                    </div>
+                    <div class="text-sm opacity-90 m-1 py-2 px-3 bg-gray-100 rounded-xl">
+                        <p>Himalaya</p>
+                    </div>
+                </div>
+
+                <p class="text-xl text-center font-bold mt-2"> Pierre noire de l'inde </p>
+
+                <div class="flex justify-center flex-col items-center flex-wrap my-3">
+                    <p class="font-medium"> Choisissez votre format : </p>
+
+                    <div class="variations_group">
+                        
+                            <input type="radio" id="10g" name="storage" value="10g" required="" checked="">
+                            <label for="10g"> 10g </label>
+                        
+                            <input type="radio" id="20g" name="storage" value="20g">
+                            <label for="20g"> 20g </label>
+                        
+                            <input type="radio" id="50g" name="storage" value="50g">
+                            <label for="50g"> 50g </label>
+                        
+                            <input type="radio" id="100g" name="storage" value="100g">
+                            <label for="100g"> 100g </label>
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="w-full my-2 flex justify-between items-center">
+                    <div id="priceDisplay" class="text-xl h-14 flex justify-center items-center font-bold px-4 py-2 bg-gray-100 rounded-xl"> 💰 35.000 ₣ </div>
+                    <div class="flex items-center border border-gray-300 rounded-md">
+                        <button type="button" class="px-3 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-l-md" onclick="decrementQuantity()">-</button>
+                        <input type="number" id="quantityInput" name="quantity" value="1" min="1" class="w-10 h-10 text-center border-none focus:ring-0" readonly>
+                        <button type="button" class="px-3 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-r-md" onclick="incrementQuantity()">+</button>
+                      </div>
+                      
+                      <script>
+                      // Prix pour chaque variation
+                      const variationPrices = {
+                        '10g': 25000,
+                        '20g': 35000,
+                        '50g': 75000,
+                        '100g': 140000
+                      };
+                      
+                      function getSelectedVariation() {
+                        const selectedRadio = document.querySelector('input[name="storage"]:checked');
+                        return selectedRadio ? selectedRadio.value : '10g';
+                      }
+                      
+                      function updatePrice() {
+                        const quantity = parseInt(document.getElementById('quantityInput').value);
+                        const selectedVariation = getSelectedVariation();
+                        const unitPrice = variationPrices[selectedVariation];
+                        const totalPrice = unitPrice * quantity;
+                        const formattedPrice = totalPrice.toLocaleString('fr-FR');
+                        document.getElementById('priceDisplay').innerHTML = `💰 ${formattedPrice} ₣`;
+                      }
+                      
+                      function incrementQuantity() {
+                        const input = document.getElementById('quantityInput');
+                        input.value = parseInt(input.value) + 1;
+                        updatePrice();
+                      }
+                      
+                      function decrementQuantity() {
+                        const input = document.getElementById('quantityInput');
+                        if (parseInt(input.value) > 1) {
+                          input.value = parseInt(input.value) - 1;
+                          updatePrice();
+                        }
+                      }
+                      
+                      document.getElementById('quantityInput').addEventListener('keydown', function(e) {
+                        e.preventDefault();
+                      });
+                      
+                      // Initialiser le prix au chargement de la page
+                      document.addEventListener('DOMContentLoaded', function() {
+                        // Ajouter des event listeners aux boutons radio des variations
+                        const variationInputs = document.querySelectorAll('input[name="storage"]');
+                        variationInputs.forEach(input => {
+                          input.addEventListener('change', updatePrice);
+                        });
+                        
+                        updatePrice();
+                      });
+                      </script>
+                </div>
+                <button type="submit" id="order_btn" name="order_btn" class="flex justify-center items-center w-full bg-[#ffb800] border-2 pb-2 pt-2 rounded-2xl text-white hover:opacity-90 transition">
+                    <div class="w-[85%] pl-8">
+                        <p class="text-lg py-1 font-semibold"> Commander </p>
+                    </div>
+                    <p id="arrow_order_btn" class="text-2xl transition duration-500">→</p>
+                </button>
+            </form>
+            
+            <div class="w-full h-full flex justify-center items-center flex-col bg-white my-3 shadow-centered rounded-2xl p-4">
+                <div class="w-full h-full flex flex-col justify-center items-center">
+                    <h4 class="pb-4 text-xl text-center font-bold w-full"> Description du produit </h4>
+                    
+                    <div class="w-full text-center mb-4">
+                        <p class="text-green-600 font-semibold mb-2">🌿 Livraison gratuite partout à Abidjan payant ailleurs 🌿</p>
+                        
+                        <p class="text-gray-700 mb-4 italic">
+                            "Vous cherchez un moyen naturel d'améliorer votre santé et votre bien-être ? Découvrez le shilajit, un trésor de la nature aux multiples bienfaits !"
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
+                            <div class="bg-blue-50 p-2 rounded-lg">
+                                <p class="font-semibold text-blue-700">💪 Boosteur d'énergie</p>
+                            </div>
+                            <div class="bg-yellow-50 p-2 rounded-lg">
+                                <p class="font-semibold text-yellow-700">🌟 Antioxydant puissant</p>
+                            </div>
+                            <div class="bg-purple-50 p-2 rounded-lg">
+                                <p class="font-semibold text-purple-700">🧘 Bien-être holistique</p>
+                            </div>
+                            <div class="bg-red-50 p-2 rounded-lg">
+                                <p class="font-semibold text-red-700">🏋️ Fitness et et boost la vitalité</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-green-600 font-semibold mb-3">
+                            🌿 Produit naturel venu directement de l'HIMALAYA dans son état BRUT et PUR. 🌿
+                        </p>
+                        
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-3 mb-3">
+                            <p class="text-red-700 font-bold">⚠️ Stock limité ⚠️</p>
+                        </div>
+                        
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                            <p class="text-green-700 font-medium">
+                                ✨ Une boîte de SHILAJIT peut faire 3 à 4 ans tout en l'utilisant chaque jour. ✨
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-full flex justify-center items-center flex-col bg-white my-3 shadow-centered rounded-2xl p-5">
+                <h4> 
+                    <span class="opacity-70">
+                        Powered by
+                    </span> 
+                    <a href="#" class="hover:text-[#ffb800]">
+                         <span class="opacity-100">
+                            <strong>
+                                Baobao
+                            </strong>
+                        </span>
+                    </a> </h4>
+            </div>
+        </section>
+        <!-- <a href="https://baobao.ci" target="_blank">
+            <div class="bottom_baobao_logo shadow-lg"></div>
+        </a> -->
+
+</body>
+</html>
